@@ -1,4 +1,7 @@
-# O'Reilly Free Ebook Downloader
+# oreillyfreebook
+[![CircleCI](https://circleci.com/gh/mitakeck/oreillyfreebook.svg?style=svg)](https://circleci.com/gh/mitakeck/oreillyfreebook)
+
+O'Reilly Free Ebook Downloader
 
 
 ## Install
@@ -16,7 +19,7 @@ $ oreillyfreebook -d directory [-f format] [-c category]
 ```
 
 ```
-option
+options
   -d directory  Specify the directory to save
   -f format     Specify the ebook format to download; the default is "pdf"
                 "pdf", "mobi", "epub"
@@ -26,11 +29,22 @@ option
 ```
 
 ```
+# ex) download all free ebook
 $ oreillyfreebook -d files
-Download : file/2016-data-science-salary-survey.pdf
-Download : file/business-models-for-the-data-economy.pdf
-Download : file/embedding-analytics-in-modern-applications.pdf
-Download : file/mapping-big-data.pdf
-Download : file/data-science-microsoft-azure-ml-python.pdf
+Download : files/2016-data-science-salary-survey.pdf
+Download : files/business-models-for-the-data-economy.pdf
+Download : files/embedding-analytics-in-modern-applications.pdf
+Download : files/mapping-big-data.pdf
+Download : files/data-science-microsoft-azure-ml-python.pdf
+...
+```
+
+```
+# ex) download iot category
+oreillyfreebook -d files -c iot
+Download : files/ambient-computing.pdf
+Download : files/governing-the-iot.pdf
+Download : files/creating-functional-teams-for-iot.pdf
+Download : files/iot-opportunities-challenges.pdf
 ...
 ```
