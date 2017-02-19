@@ -22,6 +22,11 @@ var (
 
 	// const で宣言出来ないんご
 	categorys = [...]string{"data", "business", "design", "iot", "programming", "security", "web-platform", "webops"}
+
+	// worker size : 並列ダウンロード数
+	worker = 4
+	// delay time : サーバに負荷を与えないように一定の時間待つ
+	waitSec = 5
 )
 
 func (d *Downloader) createURI(category string) ([]string, error) {
@@ -80,8 +85,8 @@ func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory strin
 			continue
 		}
 
-		// delay download
-		time.Sleep(3 * time.Second)
+		// delay
+		time.Sleep(time.Duration(waitSec) * time.Second)
 	}
 }
 
@@ -96,7 +101,7 @@ func (d *Downloader) Download(category string, format string, directory string) 
 	q := make(chan string, len(list))
 
 	// make worker
-	for i := 0; i < 4; i++ {
+	for i := 0; i < worker; i++ {
 		wg.Add(1)
 		go d.download(&wg, q, directory)
 	}
