@@ -17,7 +17,7 @@ $ oreillyfreebook -d directory [-f format] [-c category]
 
 ```
 option
-  -d directory  Specify a directory to save the file
+  -d directory  Specify the directory to save
   -f format     Specify the ebook format to download; the default is "pdf"
                 "pdf", "mobi", "epub"
   -c category   Specify the ebook category to download;
