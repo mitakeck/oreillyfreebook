@@ -7,16 +7,7 @@ O'Reilly Free Ebook Downloader
 
 ## Install
 
-### Mac
-
-```
-$ wget https://github.com/mitakeck/oreillyfreebook/releases/oreillyfreebook_darwin_amd64
-$ mv oreillyfreebook_darwin_amd64 /usr/loca/bin/oreillyfreebook
-```
-
-### Windows
-
-[click to donwload binary](https://github.com/mitakeck/oreillyfreebook/releases/oreillyfreebook_windows_amd64.exe)
+Download from [here](https://github.com/mitakeck/oreillyfreebook/releases/latest).
 
 ## Usage
 
