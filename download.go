@@ -47,6 +47,7 @@ func (d *Downloader) createURI(category string) ([]string, error) {
 
 func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory string) {
 	defer wg.Done()
+	client := &http.Client{}
 
 	for {
 		url, ok := <-q
@@ -63,21 +64,25 @@ func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory strin
 			continue
 		}
 
-		defer output.Close()
-
 		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {
 			fmt.Printf("Unable to create request (%s) : %v\n", url, err)
 			continue
 		}
 
-		client := &http.Client{}
 		res, resErr := client.Do(req)
 		if resErr != nil {
 			fmt.Printf("Error while downloading %s : %v\n", url, err)
 			continue
 		}
-		defer res.Body.Close()
+		if res.StatusCode == 404 {
+			fmt.Printf("Error while downloading %s : HTTP Status 404 \n", url)
+			RmErr := os.Remove(fileName)
+			if RmErr != nil {
+				fmt.Printf("Error while remove %s : %v", fileName, err)
+			}
+			continue
+		}
 
 		_, err = io.Copy(output, res.Body)
 		if err != nil {
@@ -85,6 +90,9 @@ func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory strin
 			continue
 		}
 
+		// clean up
+		output.Close()
+		res.Body.Close()
 		// delay
 		time.Sleep(time.Duration(waitSec) * time.Second)
 	}
