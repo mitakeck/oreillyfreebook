@@ -1,15 +1,22 @@
 # oreillyfreebook
-[![CircleCI](https://circleci.com/gh/mitakeck/oreillyfreebook.svg?style=svg)](https://circleci.com/gh/mitakeck/oreillyfreebook)
+
+[![Circle CI](https://circleci.com/gh/mitakeck/oreillyfreebook/tree/master.svg?style=shield)](https://circleci.com/gh/mitakeck/oreillyfreebook/tree/master)
 
 O'Reilly Free Ebook Downloader
 
 
 ## Install
 
+### Mac
+
 ```
-$ wget  https://github.com/mitakeck/oreillyfreebook/releases/download/v0.0.1/oreillyfreebook
-$ mv oreillyfreebook /usr/loca/bin/
+$ wget https://github.com/mitakeck/oreillyfreebook/releases/oreillyfreebook_darwin_amd64
+$ mv oreillyfreebook_darwin_amd64 /usr/loca/bin/oreillyfreebook
 ```
+
+### Windows
+
+[click to donwload binary](https://github.com/mitakeck/oreillyfreebook/releases/oreillyfreebook_windows_amd64.exe)
 
 ## Usage
 
@@ -29,7 +36,7 @@ options
 ```
 
 ```
-# ex) download all free ebook
+$ # ex) download all free ebook
 $ oreillyfreebook -d files
 Download : files/2016-data-science-salary-survey.pdf
 Download : files/business-models-for-the-data-economy.pdf
@@ -40,8 +47,8 @@ Download : files/data-science-microsoft-azure-ml-python.pdf
 ```
 
 ```
-# ex) download iot category
-oreillyfreebook -d files -c iot
+$ # ex) download iot category
+$ oreillyfreebook -d files -c iot
 Download : files/ambient-computing.pdf
 Download : files/governing-the-iot.pdf
 Download : files/creating-functional-teams-for-iot.pdf
