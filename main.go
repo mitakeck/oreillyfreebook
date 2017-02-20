@@ -24,7 +24,17 @@ func main() {
 	}
 
 	if directory == "" {
-		fmt.Errorf("-d (save directory is required)")
+		fmt.Println("-d (save directory is required)")
+		usage := `
+$ oreillyfreebook -d directory [-f format] [-c category]
+
+-d directory	Specify the directory to save
+-f format	Specify the ebook format to download; the default is "pdf"
+		"pdf", "mobi", "epub"
+-c category	Specify the ebook category to download;
+		if not specified, all categories will be download
+		"business", "design", "iot", "data", "programming", "security", "web-platform", "webops"`
+		fmt.Println(usage)
 		os.Exit(1)
 	}
 
