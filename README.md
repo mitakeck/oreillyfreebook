@@ -9,6 +9,11 @@ O'Reilly Free Ebook Downloader
 
 Download from [here](https://github.com/mitakeck/oreillyfreebook/releases/latest).
 
+```
+$ chmod +x oreillyfreebook_*
+$ mv oreillyfreebook_* /usr/loca/bin/
+```
+
 ## Usage
 
 
