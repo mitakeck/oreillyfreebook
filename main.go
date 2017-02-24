@@ -8,15 +8,17 @@ import (
 
 func main() {
 	var (
-		directory string
-		format    string
-		category  string
+		directory  string
+		format     string
+		category   string
+		searchwork string
 	)
 
 	f := flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 	f.StringVar(&directory, "d", "", "specify a directory to save the file")
 	f.StringVar(&format, "f", "pdf", "specify the ebook format")
 	f.StringVar(&category, "c", "all", "specify the ebook category")
+	f.StringVar(&searchwork, "s", "", "specify the search word for ebook")
 
 	f.Parse(os.Args[1:])
 	for 0 < f.NArg() {
@@ -33,7 +35,8 @@ $ oreillyfreebook -d directory [-f format] [-c category]
 		"pdf", "mobi", "epub"
 -c category	Specify the ebook category to download;
 		if not specified, all categories will be download
-		"business", "design", "iot", "data", "programming", "security", "web-platform", "webops"`
+		"business", "design", "iot", "data", "programming", "security", "web-platform", "webops"
+-s search-word	Specify the search word for ebook`
 		fmt.Println(usage)
 		os.Exit(1)
 	}
@@ -44,5 +47,5 @@ $ oreillyfreebook -d directory [-f format] [-c category]
 	}
 
 	d := Downloader{}
-	d.Download(category, format, directory)
+	d.Download(category, format, directory, searchwork)
 }

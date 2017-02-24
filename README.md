@@ -11,24 +11,25 @@ Download from [here](https://github.com/mitakeck/oreillyfreebook/releases/latest
 
 ```
 $ chmod +x oreillyfreebook_*
-$ mv oreillyfreebook_* /usr/loca/bin/
+$ mv oreillyfreebook_* /usr/loca/bin/oreillyfreebook
 ```
 
 ## Usage
 
 
 ```
-$ oreillyfreebook -d directory [-f format] [-c category]
+$ oreillyfreebook -d directory [-f format] [-c category] [-s search-word]
 ```
 
 ```
 options
-  -d directory  Specify the directory to save
-  -f format     Specify the ebook format to download; the default is "pdf"
-                "pdf", "mobi", "epub"
-  -c category   Specify the ebook category to download;
-                if not specified, all categories will be download
-                "business", "design", "iot", "data", "programming", "security", "web-platform", "webops"
+  -d directory    Specify the directory to save
+  -f format       Specify the ebook format to download; the default is "pdf"
+                  "pdf", "mobi", "epub"
+  -c category     Specify the ebook category to download;
+                  if not specified, all categories will be download
+                  "business", "design", "iot", "data", "programming",   "security", "web-platform", "webops"
+  -s search-word  Specify the search word for ebook
 ```
 
 ```
