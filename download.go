@@ -99,8 +99,8 @@ func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory strin
 }
 
 // Download : download file
-func (d *Downloader) Download(category string, format string, directory string) error {
-	list, err := d.getFileList(category, format)
+func (d *Downloader) Download(category string, format string, directory string, searchWord string) error {
+	list, err := d.getFileList(category, format, searchWord)
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,11 @@ func (d *Downloader) Download(category string, format string, directory string) 
 	return nil
 }
 
-func (d *Downloader) getFileList(category string, format string) ([]string, error) {
+func isContain(s string, substr string) bool {
+	return strings.Contains(strings.ToLower(s), strings.ToLower(substr))
+}
+
+func (d *Downloader) getFileList(category string, format string, searchWord string) ([]string, error) {
 	us, err := d.createURI(category)
 	if err != nil {
 		return nil, err
@@ -143,7 +147,9 @@ func (d *Downloader) getFileList(category string, format string) ([]string, erro
 				return
 			}
 			u = uSplit[0] + "." + format
-			result = append(result, u)
+			if isContain(u, searchWord) {
+				result = append(result, u)
+			}
 		})
 	}
 	return result, nil
