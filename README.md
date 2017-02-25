@@ -1,6 +1,6 @@
 # oreillyfreebook
 
-[![Circle CI](https://circleci.com/gh/mitakeck/oreillyfreebook/tree/master.svg?style=shield)](https://circleci.com/gh/mitakeck/oreillyfreebook/tree/master)
+[![Circle CI](https://circleci.com/gh/mitakeck/oreillyfreebook/tree/master.svg?style=shield)](https://circleci.com/gh/mitakeck/oreillyfreebook/tree/master) [![Go Report Card](https://goreportcard.com/badge/github.com/mitakeck/oreillyfreebook)](https://goreportcard.com/report/github.com/mitakeck/oreillyfreebook) [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mitakeck/oreillyfreebook/blob/master/LICENSE)
 
 O'Reilly Free Ebook Downloader
 
