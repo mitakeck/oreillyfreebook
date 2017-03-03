@@ -16,7 +16,7 @@ $ chmod +x oreillyfreebook_*
 $ mv oreillyfreebook_* /usr/loca/bin/oreillyfreebook
 ```
 
-### From sorce code
+### From source code
 
 ```
 $ go get github.com/mitakeck/oreillyfreebook
