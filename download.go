@@ -10,6 +10,8 @@ import (
 	"sync"
 	"time"
 
+	pb "gopkg.in/cheggaaa/pb.v1"
+
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -26,7 +28,7 @@ var (
 	// worker size : 並列ダウンロード数
 	worker = 4
 	// delay time : サーバに負荷を与えないように一定の時間待つ
-	waitSec = 5
+	waitSec = 10
 )
 
 func (d *Downloader) createURI(category string) ([]string, error) {
@@ -45,7 +47,7 @@ func (d *Downloader) createURI(category string) ([]string, error) {
 	return nil, fmt.Errorf("Invalid category : %s", category)
 }
 
-func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory string) {
+func (d *Downloader) download(pool *pb.Pool, wg *sync.WaitGroup, q chan string, directory string) {
 	defer wg.Done()
 	client := &http.Client{}
 
@@ -57,7 +59,7 @@ func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory strin
 
 		fileName, _ := pop(strings.Split(url, "/"))
 		fileName = filepath.Join(directory, fileName)
-		fmt.Printf("Download : %s\n", fileName)
+
 		output, err := os.Create(fileName)
 		if err != nil {
 			fmt.Printf("Error while creating %s : %v\n", fileName, err)
@@ -84,7 +86,15 @@ func (d *Downloader) download(wg *sync.WaitGroup, q chan string, directory strin
 			continue
 		}
 
-		_, err = io.Copy(output, res.Body)
+		// create new bar
+		bar := pb.New(int(res.ContentLength)).SetUnits(pb.U_BYTES).Prefix(fmt.Sprintf("%-90s", url))
+		bar.ShowBar = false
+
+		pool.Add(bar)
+		// bar.Start()
+		writer := io.MultiWriter(output, bar)
+
+		_, err = io.Copy(writer, res.Body)
 		if err != nil {
 			fmt.Printf("Error while downloading %s : %v\n", url, err)
 			continue
@@ -107,11 +117,15 @@ func (d *Downloader) Download(category string, format string, directory string, 
 
 	var wg sync.WaitGroup
 	q := make(chan string, len(list))
+	pool, err := pb.StartPool()
+	if err != nil {
+		return err
+	}
 
 	// make worker
 	for i := 0; i < worker; i++ {
 		wg.Add(1)
-		go d.download(&wg, q, directory)
+		go d.download(pool, &wg, q, directory)
 	}
 
 	for _, url := range list {
@@ -120,11 +134,9 @@ func (d *Downloader) Download(category string, format string, directory string, 
 	close(q)
 
 	wg.Wait()
-	return nil
-}
+	pool.Stop()
 
-func isContain(s string, substr string) bool {
-	return strings.Contains(strings.ToLower(s), strings.ToLower(substr))
+	return nil
 }
 
 func (d *Downloader) getFileList(category string, format string, searchWord string) ([]string, error) {
