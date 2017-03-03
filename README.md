@@ -7,14 +7,26 @@ O'Reilly Free Ebook Downloader
 
 ## Install
 
-Download from [here](https://github.com/mitakeck/oreillyfreebook/releases/latest).
+### From binary
+
+- Download from [here](https://github.com/mitakeck/oreillyfreebook/releases/latest).
 
 ```
 $ chmod +x oreillyfreebook_*
 $ mv oreillyfreebook_* /usr/loca/bin/oreillyfreebook
 ```
 
+### From sorce code
+
+```
+$ go get github.com/mitakeck/oreillyfreebook
+$ cd $GOPATH/src/github.com/mitakeck/oreillyfreebook
+$ go install
+```
+
 ## Usage
+
+[![asciicast](https://asciinema.org/a/4y4udfbh4lf26jbfxzown0zkz.png)](https://asciinema.org/a/4y4udfbh4lf26jbfxzown0zkz)
 
 
 ```
