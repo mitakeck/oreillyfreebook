@@ -7,6 +7,13 @@ O'Reilly Free Ebook Downloader
 
 ## Install
 
+### From Homebrew
+
+```
+$ brew tap mitakeck/oreillyfreebook
+$ brew install oreillyfreebook
+```
+
 ### From binary
 
 - Download from [here](https://github.com/mitakeck/oreillyfreebook/releases/latest).
